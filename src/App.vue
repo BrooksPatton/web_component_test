@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <router-link :to="route('web-test')">Home</router-link> |
+      <router-link :to="route('web-about')">About</router-link>
+    </div>
+    <router-view/>
   </div>
-</template>
+</template>  
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import router from './router'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  router,
+  props: ['root'],
+  mounted() {
+    console.log('web component test mounted: ', this.root)
+  },
+  methods: {
+    route(path) {
+      return `/${this.root}/${path}`
+    }
   }
 }
 </script>
@@ -23,6 +31,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
